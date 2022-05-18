@@ -109,7 +109,14 @@ me = ModelEvaluation()
 me.report_metrics(model,y_test,X_test)
 
 # =============================================================================
-# Not good
+# Not good enough
+# Training loss and validation loss are both high, which indicates underfitting
+# Accuracy recorded at 52%, which indicates not a reliable model
+# Suggestion : 
+# - Add more data, because model is underfitted
+# - Remove Dropout layer, because data is not sufficient
+# - Do feature selection
+# - Add more layers
 # =============================================================================
 
 #%% Save Model
