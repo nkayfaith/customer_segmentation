@@ -4,7 +4,7 @@ This project is a part of the assessment for SHRDC Data Science course
 #### -- Project Status: [Completed]
 
 ## Project Intro/Objective
-The purpose of this project is to produce a deep learning model to segmentate and predict customers based on features given
+The purpose of this project is to produce a deep learning model to segmentate and predict customers segment based on features given
 
 ### Methods Used
 * Inferential Statistics
@@ -17,7 +17,6 @@ The purpose of this project is to produce a deep learning model to segmentate an
 * Python
 * Pandas, Numpy, Sklearn
 * Tensorflow
-* Google Colaboratory
 
 ## Getting Started
 
@@ -28,16 +27,30 @@ The purpose of this project is to produce a deep learning model to segmentate an
 
 ## Discussion, Analysis and Result
 1. Model Architecture as follows:
+
+A Sequential model with attributes of Dense = 256, Dropout = .3, Hidden Layer = 3, Epochs = 100 
 ![image](statics/model.png)
 
 
 2. Training processes recorded as follows:
-![image](statics/model.PNG)
 
+Training loss and validation loss are both high, which indicates underfitting 
+![image](statics/loss.png)
+
+
+Accuracy recorded at 52%, which indicates a not-that reliable model
+![image](statics/accuracy.png)
 
 3. Performance of the model and the reports as follows:
-![image](statics/model.png)
 
+Both F1 and Accuracy recorded at 
+![image](statics/performance.PNG)
+
+4. Enhancement suggested:
+* Do feature selection
+* Add more data, because model is underfitted
+* Remove Dropout layer, because data is not sufficient
+* Add more layer
 
 ## Credits
 https://www.kaggle.com/datasets/abisheksudarshan/customer-segmentation
