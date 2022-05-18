@@ -8,8 +8,7 @@ Created on Wed May 18 09:07:24 2022
 #%% Imports and Paths
 
 from sklearn.impute import KNNImputer
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import  MinMaxScaler
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
 from tensorflow.keras import Input, Sequential
 from tensorflow.keras.layers import Dense, Dropout,BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard, EarlyStopping
@@ -39,6 +38,24 @@ class ExploratoryDataAnalysis():
         df_temp = data.astype("object").apply(le.fit_transform)
         data = df_temp.where(~data.isna(), data)
         return data
+    
+    def one_hot_encoder(self,data):
+        '''
+        This function will encode input data using one hot encoder approach
+    
+        Parameters
+        ----------
+        input_data : List,Array
+            Input Data will undergo one-hot encoding.
+    
+        Returns
+        -------
+        encoded(input_data) : Array
+            Input Data will undergo one-hot encoding.
+    
+        '''
+        enc = OneHotEncoder(sparse=False)
+        return enc.fit_transform(np.expand_dims(data,axis=-1))
     
     def impute_data(self,data):
         imputer = KNNImputer(n_neighbors=5, metric="nan_euclidean") 
@@ -89,6 +106,9 @@ class ModelCreation():
         model.add(Dense(nb_nodes,activation=activation))
         model.add(BatchNormalization())
         model.add(Dropout(dropout))
+        model.add(Dense(nb_nodes,activation=activation))
+        model.add(BatchNormalization())
+        model.add(Dropout(dropout))
         model.add(Dense(nb_class, activation='softmax'))
         model.summary()
         model.compile(optimizer='adam', 
@@ -96,6 +116,9 @@ class ModelCreation():
                       metrics='acc')    
         model.summary()
         return model
+    
+    def model_plot(self,model):
+        plot_model(model)
     
 class ModelTraining():
     def model_training(self,model, x_train,y_train, validation_data,epochs=100):

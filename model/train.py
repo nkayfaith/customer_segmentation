@@ -36,7 +36,11 @@ df[df.duplicated()]
 #%% Step 3) Data Cleaning
 
 # Remove Outliers (column ID)
+
+y = df.iloc[:,-1]
 df = df.iloc[:,1:]
+df = df.iloc[:,:-1] 
+
 eda = ExploratoryDataAnalysis()
 
 # Convert to numeric
@@ -55,30 +59,31 @@ df = eda.impute_data(df)
 eda.feature_selection(df)
 
 # =============================================================================
-# No features are selected since the highest correlation scores less than 80%
+# No features are selected since the highest correlation scores less than 70%
 # =============================================================================
 
 #%% Step 5) Data Preprocessing
 
+#Encode
+y = eda.one_hot_encoder(y)
 
-X = df.iloc[:,:-1] 
-y = df.iloc[:,-1]
-
+# Scale
+X = df
 X = eda.scale_data(X)
-y = eda.scale_data(np.expand_dims(y,axis=-1))
+y = eda.scale_data(y)
 
 # =============================================================================
 # Scale all features using minmax because data contains no negative values
-# Label is already encoded in Step 3
+# Encode label using OHE
 # =============================================================================
 
 #%% Step 6) Model Building
 
 mc = ModelCreation()
-model = mc.model_create(y.shape[1], X.shape[1],nb_nodes=64,dropout=.3)
+model = mc.model_create(y.shape[1], X.shape[1],nb_nodes=256,dropout=.2)
 
 # =============================================================================
-# Dense = 64, Dropout = .3 for best performance
+# Dense = 256, Dropout = .3, Hidden Layer = 3
 # =============================================================================
 
 #%% Step 7) Model Training
@@ -90,7 +95,7 @@ hist = mt.model_training(model, X_train,y_train, (X_test,y_test),epochs=100)
 print(hist.history.keys())
 
 # =============================================================================
-# Epochs = 100 for best performance
+# Epochs = 100 
 # =============================================================================
 
 #%% Step 8) Model Performance
