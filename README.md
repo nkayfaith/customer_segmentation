@@ -34,14 +34,14 @@ A Sequential model with attributes of Dense = 256, Dropout = .3, Hidden Layer = 
 
 2. Training processes recorded as follows:
 Loss
-![image](statics/loss.PNG)
+![image](statics/loss.png)
 
 Accuracy : 52%
-![image](statics/accuracy.PNG)
+![image](statics/accuracy.png)
 
 3. Performance of the model and the reports as follows:
 
-![image](statics/performance.png)
+![image](statics/performance.PNG)
 
 4. Enhancement suggested:
 * Do feature selection
