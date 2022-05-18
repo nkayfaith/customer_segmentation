@@ -33,22 +33,24 @@ A Sequential model with attributes of Dense = 256, Dropout = .3, Hidden Layer = 
 
 
 2. Training processes recorded as follows:
+
+Training loss and validation loss are both high, which indicates underfitting 
 ![image](statics/loss.png)
 
 
-Accuracy : 52%
+Accuracy recorded at 52%, which indicates a not-that reliable model
 ![image](statics/accuracy.png)
-
-
 
 3. Performance of the model and the reports as follows:
 
+Both F1 and Accuracy recorded at 
 ![image](statics/performance.PNG)
 
 4. Enhancement suggested:
 * Do feature selection
-* Add more data
-* 
+* Add more data, because model is underfitted
+* Remove Dropout layer, because data is not sufficient
+* Add more layer
 
 ## Credits
 https://www.kaggle.com/datasets/abisheksudarshan/customer-segmentation
